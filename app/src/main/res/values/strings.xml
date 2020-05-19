@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Final_exam</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="map_direction_title">Hospital Civil\nFray Antonio Alcalde</string>
+    <string name="map_direction_direction">Coronel Calderón 777\nEl Retiro, 44280\nGuadalajara, Jal. </string>
 </resources>
