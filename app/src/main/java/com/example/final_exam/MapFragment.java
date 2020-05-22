@@ -39,9 +39,9 @@ public class MapFragment extends Fragment  implements OnMapReadyCallback {
     @Override
     public void onViewCreated(View v, Bundle savedState){
         super.onViewCreated(v,savedState);
-        SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
+        /*SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this);*/
     }
 
     @Override
