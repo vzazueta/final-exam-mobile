@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setViewComponents();
-        setTint( R.id.iv_list_cita_icon, R.color.selectedIcon);
+        setTint( R.id.iv_list_cita_icon, R.color.red_accent_3);
         if (findViewById(R.id.fragment_container_menu) != null) {
             if (savedInstanceState != null) return;
             // Create a new Fragment to be placed in the activity layout
@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setSelected(int i) {
-        setTint( R.id.iv_map_icon,  R.color.colorPrimaryDark);
-        setTint( R.id.iv_create_icon,   R.color.colorPrimaryDark);
-        setTint( R.id.iv_list_cita_icon,   R.color.colorPrimaryDark);
-        setTint( i,  R.color.selectedIcon);
+        setTint( R.id.iv_map_icon,  R.color.white);
+        setTint( R.id.iv_create_icon,   R.color.white);
+        setTint( R.id.iv_list_cita_icon,   R.color.white);
+        setTint( i,  R.color.red_accent_3);
         switch (i) {
             case R.id.iv_map_icon:
                 replaceFragment( new MapFragment());

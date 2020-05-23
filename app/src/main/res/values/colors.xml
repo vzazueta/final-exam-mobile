@@ -5,4 +5,11 @@
     <color name="colorAccent">#DA0303</color>
     <color name="selectedIcon">@color/colorPrimary</color>
 
+    <color name="gray">#253A4B</color>
+    <color name="semi_light_gray">#3E617E</color>
+    <color name="light_gray">#DEE1E2</color>
+    <color name="red">#F23B5F</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red_accent_3">#ff1744</color>
+
 </resources>
