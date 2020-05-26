@@ -18,20 +18,20 @@ export class UserController {
         return await this.service.get();
     }
 
-    @Get(":id")
-    async getOne(@Param('id') id) {
-        const user = await this.service.getOne(id);
-        if (!user) {
-            throw new NotFoundException('Object does not exist!');
-        }
-        return user;
-    }
-
     @Get("login")
     async login(@Body() data: {id: String, pass: String}) {
         const user = await this.service.getOne(data.id);
         if(!user || user.password != data.pass){
             return {};
+        }
+        return user;
+    }
+
+    @Get(":id")
+    async getOne(@Param('id') id) {
+        const user = await this.service.getOne(id);
+        if (!user) {
+            throw new NotFoundException('Object does not exist!');
         }
         return user;
     }
