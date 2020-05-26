@@ -1,17 +1,28 @@
 package com.example.final_exam;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -21,6 +32,7 @@ import android.widget.Button;
  */
 public class LoginFragment extends Fragment {
     Button loginBtn;
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -51,7 +63,7 @@ public class LoginFragment extends Fragment {
 
     /* ------------------------TEST FASE 1 -----------------------------------*/
     View.OnClickListener clickSimple = view -> {
-        Intent i = new Intent(getActivity(),MainActivity.class);
+        Intent i = new Intent(getActivity(), MainActivity.class);
         startActivity(i);
     };
     /* ---------------------Borrar en un futuro ------------------------------*/

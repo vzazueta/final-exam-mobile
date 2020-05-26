@@ -20,7 +20,7 @@
     <string name="item_genero">Género</string>
     <string name="item_edad">Edad</string>
     <string name="item_id">ID</string>
-    <string name="item_alergico">Alergico a</string>
+    <string name="item_notas">Notas adicionales:</string>
     <string name="item_detalles">Detalles de la cita</string>
     <string name="item_fecha">Fecha de la cita</string>
     <string name="item_cita_title">Cita</string>

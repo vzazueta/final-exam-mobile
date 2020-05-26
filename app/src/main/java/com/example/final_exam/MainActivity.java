@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
     ImageView addCitaMenu, listaCitaMenu, mapMenu;
-
+    public User user; //TODO GET USER
     View.OnClickListener menuClickListener = view -> {
         int idIconMenu = view.getId();
         setSelected(idIconMenu);
