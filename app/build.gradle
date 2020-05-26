@@ -4,6 +4,11 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId "com.example.final_exam"
         minSdkVersion 23
@@ -20,7 +25,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -37,4 +41,5 @@ dependencies {
     implementation 'com.google.maps:google-maps-services:0.11.0'
     implementation 'org.slf4j:slf4j-simple:1.7.25'
     implementation 'com.google.maps.android:android-maps-utils:1.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
