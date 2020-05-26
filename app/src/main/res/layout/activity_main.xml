@@ -19,6 +19,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
         android:layout_height="80dp"
+        android:background="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -29,27 +30,24 @@
             android:id="@+id/iv_create_icon"
             android:layout_width="48dp"
             android:layout_height="0dp"
-            android:foregroundTint="@color/colorPrimaryDark"
-            android:tint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/iv_map_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/iv_map_icon"
             app:layout_constraintTop_toTopOf="@+id/iv_map_icon"
-            app:srcCompat="@drawable/add" />
+            app:srcCompat="@drawable/ic_add_circle_outline_white_24dp" />
 
         <ImageView
             android:id="@+id/iv_map_icon"
             android:layout_width="48dp"
             android:layout_height="0dp"
-            android:foregroundTint="@color/colorPrimaryDark"
-            android:tint="@color/colorPrimaryDark"
+
             app:layout_constraintBottom_toBottomOf="@+id/iv_list_cita_icon"
             app:layout_constraintEnd_toStartOf="@+id/iv_create_icon"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/iv_list_cita_icon"
             app:layout_constraintTop_toTopOf="@+id/iv_list_cita_icon"
-            app:srcCompat="@drawable/location" />
+            app:srcCompat="@drawable/ic_map_white_24dp" />
 
         <ImageView
             android:id="@+id/iv_list_cita_icon"
@@ -57,14 +55,13 @@
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:foregroundTint="@color/colorPrimaryDark"
-            android:tint="@color/colorPrimaryDark"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iv_map_icon"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/open_menu" />
+            app:srcCompat="@drawable/ic_menu_white_24dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,6 +97,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="34sp"
             android:textStyle="bold"
+            android:fontFamily="@font/champagnebold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView6"
             app:layout_constraintHorizontal_bias="0.5"
