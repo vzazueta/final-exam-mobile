@@ -27,6 +27,15 @@ export class UserController {
         return user;
     }
 
+    @Get("login")
+    async login(@Body() data: {id: String, pass: String}) {
+        const user = await this.service.getOne(data.id);
+        if(!user || user.password != data.pass){
+            return {};
+        }
+        return user;
+    }
+
     @Put(":id")
     async edit(@Param('id') id, @Body() dto: UserDTO){
         const editedUser = await this.service.edit(id, dto);
