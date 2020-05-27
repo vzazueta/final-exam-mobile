@@ -21,7 +21,6 @@ import android.widget.Button;
  * create an instance of this fragment.
  */
 public class LoginFragment extends Fragment {
-<<<<<<< HEAD
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,9 +31,8 @@ public class LoginFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-=======
     Button loginBtn;
->>>>>>> a51851edaf8db1f8bca9a16bda1647978d96042b
+
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -48,16 +46,13 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
+
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
-=======
->>>>>>> a51851edaf8db1f8bca9a16bda1647978d96042b
     }
 
     @Override
@@ -73,11 +68,34 @@ public class LoginFragment extends Fragment {
         loginBtn.setOnClickListener(clickSimple);
     }
 
-    /* ------------------------TEST FASE 1 -----------------------------------*/
+    ///* ------------------------TEST FASE 1 -----------------------------------
     View.OnClickListener clickSimple = view -> {
+        this.makeRequest("https://final-exam-mobile.herokuapp.com/user/login");
         Intent i = new Intent(getActivity(),MainActivity.class);
         startActivity(i);
     };
-    /* ---------------------Borrar en un futuro ------------------------------*/
+     //---------------------Borrar en un futuro ------------------------------*/
+
+    public void makeRequest(String url){
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        textView.setText("Response is: "+ response.substring(0,500));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                textView.setText("That didn't work!");
+            }
+        });
+
+        queue.add(stringRequest);
+
+
+    }
 
 }

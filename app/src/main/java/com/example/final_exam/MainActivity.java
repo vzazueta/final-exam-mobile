@@ -1,27 +1,19 @@
 package com.example.final_exam;
 
 import androidx.appcompat.app.AppCompatActivity;
-<<<<<<< HEAD
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
-
-public class MainActivity extends AppCompatActivity {
-    public Fragment previousFragment;
-    public Fragment currentCentralFragment;
-    private int container = R.id.fragment_container;
-=======
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+@android.support.annotation.RequiresApi(api = Build.VERSION_CODES.FROYO)
 public class MainActivity extends AppCompatActivity {
     ImageView addCitaMenu, listaCitaMenu, mapMenu;
 
@@ -29,40 +21,15 @@ public class MainActivity extends AppCompatActivity {
         int idIconMenu = view.getId();
         setSelected(idIconMenu);
     };
->>>>>>> a51851edaf8db1f8bca9a16bda1647978d96042b
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.FROYO)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-
-        replaceFragment(new LoginFragment());
-    }
-
-    public void replaceFragment(Fragment f){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if(currentCentralFragment == null || !currentCentralFragment.getClass().equals(f.getClass())){
-            previousFragment = currentCentralFragment;
-            currentCentralFragment = f;
-            fragmentTransaction.replace(container, f);
-            fragmentTransaction.commit();
-        }
-    }
-
-    //Hardware Back Button method
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK) {
-            replaceFragment(previousFragment);
-            return true;
-        }
-
-        return false;
-=======
         setViewComponents();
         setTint( R.id.iv_list_cita_icon, R.color.red_accent_3);
+
         if (findViewById(R.id.fragment_container_menu) != null) {
             if (savedInstanceState != null) return;
             // Create a new Fragment to be placed in the activity layout
@@ -76,6 +43,21 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container_menu, firstFragment).commit();
         }
     }
+
+    /*
+    public void replaceFragment(Fragment f){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if(currentCentralFragment == null || !currentCentralFragment.getClass().equals(f.getClass())){
+            previousFragment = currentCentralFragment;
+            currentCentralFragment = f;
+            fragmentTransaction.replace(container, f);
+            fragmentTransaction.commit();
+        }
+    }*/
+
+
     public void setViewComponents(){
         addCitaMenu = findViewById(R.id.iv_create_icon);
         listaCitaMenu = findViewById(R.id.iv_list_cita_icon);
@@ -85,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         listaCitaMenu.setOnClickListener(menuClickListener);
     }
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.FROYO)
     public void setSelected(int i) {
         setTint( R.id.iv_map_icon,  R.color.white);
         setTint( R.id.iv_create_icon,   R.color.white);
@@ -92,21 +75,21 @@ public class MainActivity extends AppCompatActivity {
         setTint( i,  R.color.red_accent_3);
         switch (i) {
             case R.id.iv_map_icon:
-                replaceFragment( new MapFragment());
+                replaceFragment(new MapFragment());
                 break;
             case R.id.iv_create_icon:
-                replaceFragment( new CreateCitaFragment());
+                replaceFragment(new CreateCitaFragment());
                 break;
             case R.id.iv_list_cita_icon:
             default:
-                replaceFragment( new ListaCitasFragment());
+                replaceFragment(new ListaCitasFragment());
                 break;
         }
     }
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.FROYO)
     public void setTint(int id, int color){
         ((ImageView)(findViewById(id))).setColorFilter(ContextCompat.getColor(this, color));
->>>>>>> a51851edaf8db1f8bca9a16bda1647978d96042b
     }
 
     public void replaceFragment(Fragment newFragment){
