@@ -18,10 +18,10 @@ export class UserController {
         return await this.service.get();
     }
 
-    @Get("login")
-    async login(@Body() data: {id: String, pass: String}) {
-        const user = await this.service.getOne(data.id);
-        if(!user || user.password != data.pass){
+    @Get("login/:id/:pass")
+    async login(@Param('id') id, @Param('pass') pass: String) {
+        const user = await this.service.getOne(id);
+        if(!user || user.password != pass){
             return {};
         }
         return user;
