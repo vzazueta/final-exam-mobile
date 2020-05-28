@@ -1,6 +1,7 @@
 package com.example.final_exam;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,10 +18,12 @@ public class MainActivity extends AppCompatActivity {
         setSelected(idIconMenu);
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setViewComponents();
         setTint( R.id.iv_list_cita_icon, R.color.red_accent_3);
         if (findViewById(R.id.fragment_container_menu) != null) {
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container_menu, firstFragment).commit();
         }
     }
+
     public void setViewComponents(){
         addCitaMenu = findViewById(R.id.iv_create_icon);
         listaCitaMenu = findViewById(R.id.iv_list_cita_icon);
