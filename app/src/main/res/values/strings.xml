@@ -34,4 +34,9 @@
 
     <string name="qr">Sección para añadir camara embebida o QR</string>
 
+    <string name="maps_hospital_tag">Hospital:&#160;</string>
+    <string name="maps_km">km</string>
+    <string name="maps_error">No se encontró ruta</string>
+
+    <string name="maps_key">Key</string>
 </resources>

@@ -7,7 +7,7 @@
     tools:context=".LoginFragment">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/user_edit_text"
         android:layout_width="310dp"
         android:layout_height="50sp"
         android:layout_marginBottom="24dp"
@@ -18,13 +18,13 @@
         android:minEms="10"
         android:textColorHint="@color/gray"
         android:textColor="@color/gray"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/password_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/password_edit_text"
         android:layout_width="310dp"
         android:layout_height="50sp"
         android:layout_marginBottom="32dp"

@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-@android.support.annotation.RequiresApi(api = Build.VERSION_CODES.FROYO)
 public class MainActivity extends AppCompatActivity {
     ImageView addCitaMenu, listaCitaMenu, mapMenu;
 
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         setSelected(idIconMenu);
     };
 
-    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.FROYO)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,20 +42,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    public void replaceFragment(Fragment f){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        if(currentCentralFragment == null || !currentCentralFragment.getClass().equals(f.getClass())){
-            previousFragment = currentCentralFragment;
-            currentCentralFragment = f;
-            fragmentTransaction.replace(container, f);
-            fragmentTransaction.commit();
-        }
-    }*/
-
-
     public void setViewComponents(){
         addCitaMenu = findViewById(R.id.iv_create_icon);
         listaCitaMenu = findViewById(R.id.iv_list_cita_icon);
@@ -67,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         listaCitaMenu.setOnClickListener(menuClickListener);
     }
 
-    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.FROYO)
     public void setSelected(int i) {
         setTint( R.id.iv_map_icon,  R.color.white);
         setTint( R.id.iv_create_icon,   R.color.white);
@@ -87,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.FROYO)
     public void setTint(int id, int color){
         ((ImageView)(findViewById(id))).setColorFilter(ContextCompat.getColor(this, color));
     }
