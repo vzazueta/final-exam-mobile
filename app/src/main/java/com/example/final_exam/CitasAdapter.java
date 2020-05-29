@@ -2,6 +2,7 @@ package com.example.final_exam;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,16 +57,17 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvName,tvEdad, tvGenero, tvId, tvFecha, tvNotas;
+        private TextView tvName,tvEdad, tvGenero, tvId, tvFecha, tvNotas, tvAlergias;
 
         public ViewHolder( View view) {
             super(view);
-            tvName= view.findViewById(R.id.tv_item_nombre);
-            tvEdad= view.findViewById(R.id.tv_item_edad);
-            tvGenero= view.findViewById(R.id.tv_item_genero);
-            tvId= view.findViewById(R.id.tv_item_id);
-            tvFecha= view.findViewById(R.id.tv_item_fecha);
-            tvNotas= view.findViewById(R.id.tv_item_notas);
+            tvName = view.findViewById(R.id.tv_item_nombre);
+            tvEdad = view.findViewById(R.id.tv_item_edad);
+            tvGenero = view.findViewById(R.id.tv_item_genero);
+            tvId = view.findViewById(R.id.tv_item_id);
+            tvFecha = view.findViewById(R.id.tv_item_fecha);
+            tvNotas = view.findViewById(R.id.tv_item_notas);
+            tvAlergias = view.findViewById(R.id.tv_item_alergias);
         }
 
 
@@ -75,7 +77,8 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
             tvGenero.setText(c.getUser().getGender());
             tvId.setText(c.getUser().getId());
             setDate(c.getFecha());
-            tvNotas.setText("Alergico a: "+ c.getNotas());
+            tvNotas.setText(c.getNotas());
+            tvAlergias.setText(c.getUser().getAllergies());
         }
 
         private void setDate(String input){
