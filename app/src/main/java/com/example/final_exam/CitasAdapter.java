@@ -82,7 +82,7 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
             try {
                 String[] date = input.split(" ");
                 String[] hora = date[3].split(":");
-                tvFecha.setText(hora[0]+":"+hora[]+", "+date[0] +" " +date[1]+" " +date[2]+ ", "+date[date.length-1]);
+                tvFecha.setText(hora[0]+":"+hora[1]+", "+date[0] +" " +date[1]+" " +date[2]+ ", "+date[date.length-1]);
             }catch (Exception e){
                 tvFecha.setText(input);
             }
