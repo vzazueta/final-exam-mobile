@@ -38,6 +38,8 @@
     <string name="maps_km">km</string>
     <string name="maps_error">No se encontró ruta</string>
 
-    <string name="maps_key">Key</string>
     <string name="alergias">Alergias</string>
+    <string name="mapa">Mapa</string>
+    <string name="citas">Citas</string>
+    <string name="nueva_cita">Nueva Cita</string>
 </resources>
