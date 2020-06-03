@@ -45,7 +45,12 @@ public class CreateCitaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        content = getArguments().getString("content").split(",");
+        try {
+            content = getArguments().getString("content").split(",");
+        } catch(Exception ex){
+            Toast.makeText(getActivity(), "Porfavor verifique el codigo QR", Toast.LENGTH_LONG).show();
+            ((StartActivity)getActivity()).replaceFragment(new StartFragment());
+        }
         return inflater.inflate(R.layout.fragment_create_cita, container, false);
     }
 
@@ -60,9 +65,14 @@ public class CreateCitaFragment extends Fragment {
         etFecha = view.findViewById(R.id.et_cita_fecha);
         btnSubmit = view.findViewById(R.id.btn_cita_submit);
 
-        tvNombre.setText(content[1]);
-        tvEdad.setText(""+calculateAge(content[2]));
-        tvAlergias.setText(content[3]);
+        try {
+            tvNombre.setText(content[1]);
+            tvEdad.setText("" + calculateAge(content[2]));
+            tvAlergias.setText(content[3]);
+        } catch(Exception ex){
+            Toast.makeText(getActivity(), "Porfavor verifique el codigo QR", Toast.LENGTH_LONG).show();
+            ((StartActivity)getActivity()).replaceFragment(new StartFragment());
+        }
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,17 +100,12 @@ public class CreateCitaFragment extends Fragment {
         });
     }
 
-    private int calculateAge(String date){
-        try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            Date dob = inputFormat.parse(date);
-            LocalDate ldate = Instant.ofEpochMilli(dob.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate now1 = LocalDate.now();
-            Period diff1 = Period.between(ldate, now1);
-            return diff1.getYears();
-        } catch(ParseException ex){
-            Log.e("CITA", ex.toString());
-        }
-        return 0;
+    private int calculateAge(String date) throws ParseException{
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        Date dob = inputFormat.parse(date);
+        LocalDate ldate = Instant.ofEpochMilli(dob.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate now1 = LocalDate.now();
+        Period diff1 = Period.between(ldate, now1);
+        return diff1.getYears();
     }
 }
