@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateCitaFragment">
+
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/thebold"
+        android:text="@string/actualiza_cita"
+        android:textColor="@color/gray"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_update_fecha"
+        android:layout_width="371dp"
+        android:layout_height="50sp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/input_field"
+        android:ems="10"
+        android:hint="@string/fecha"
+        android:inputType="date"
+        android:minEms="10"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/gray"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/et_update_hora"
+        app:layout_constraintStart_toStartOf="@+id/et_update_hora"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_hora" />
+
+    <EditText
+        android:id="@+id/et_update_hora"
+        android:layout_width="0dp"
+        android:layout_height="50sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/input_field"
+        android:ems="10"
+        android:hint="@string/hora"
+        android:inputType="time"
+        android:minEms="10"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <Button
+        android:id="@+id/btn_actualizar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button"
+        android:text="@string/actualizar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/white"
+        android:textColorHighlight="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_descripcion" />
+
+    <Button
+        android:id="@+id/btn_eliminar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/buttonemergency"
+        android:text="@string/eliminar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/white"
+        android:textColorHighlight="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_actualizar" />
+
+    <EditText
+        android:id="@+id/et_update_descripcion"
+        android:layout_width="0dp"
+        android:layout_height="50sp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/input_field"
+        android:ems="10"
+        android:hint="@string/descripcion"
+        android:inputType="text"
+        android:minEms="10"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="@+id/et_update_fecha"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_update_fecha"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_fecha" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

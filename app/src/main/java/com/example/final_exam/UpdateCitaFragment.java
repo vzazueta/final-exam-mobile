@@ -26,23 +26,18 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.Date;
 
 
-public class CreateCitaFragment extends Fragment {
+public class UpdateCitaFragment extends Fragment {
     private static String URL = "https://final-exam-mobile.herokuapp.com/";
-    // 0=id, 1=name, 2=dob, 3=allergies
-    private String[] content;
 
-    private TextView tvNombre, tvEdad, tvAlergias;
+    private Cita cita;
+
     private EditText etHora, etFecha, etDescripcion;
-    private Button btnSubmit;
+    private Button btnUpdate, btnRemove;
 
-    public CreateCitaFragment() {}
+    public UpdateCitaFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,35 +48,40 @@ public class CreateCitaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         try {
-            content = getArguments().getString("content").split(",");
+            cita = getArguments().getParcelable("cita");
         } catch(Exception ex){
-            Toast.makeText(getActivity(), "Porfavor verifique el codigo QR", Toast.LENGTH_LONG).show();
-            ((StartActivity)getActivity()).replaceFragment(new StartFragment());
+            Toast.makeText(getActivity(), "Porfavor intente mas tarde", Toast.LENGTH_LONG).show();
+            ((MainActivity)getActivity()).replaceFragment(new ListaCitasFragment());
         }
-        return inflater.inflate(R.layout.fragment_create_cita, container, false);
+        return inflater.inflate(R.layout.fragment_update_cita, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tvNombre = view.findViewById(R.id.tv_cita_nombre);
-        tvEdad = view.findViewById(R.id.tv_cita_edad);
-        tvAlergias = view.findViewById(R.id.tv_cita_alergias);
         etDescripcion = view.findViewById(R.id.et_update_descripcion);
         etHora = view.findViewById(R.id.et_update_hora);
         etFecha = view.findViewById(R.id.et_update_fecha);
-        btnSubmit = view.findViewById(R.id.btn_actualizar);
+        btnUpdate = view.findViewById(R.id.btn_actualizar);
+        btnRemove = view.findViewById(R.id.btn_eliminar);
+
+
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat defaultFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
         try {
-            tvNombre.setText(content[1]);
-            tvEdad.setText("" + calculateAge(content[2]));
-            tvAlergias.setText(content[3]);
-        } catch(Exception ex){
-            Toast.makeText(getActivity(), "Porfavor verifique el codigo QR", Toast.LENGTH_LONG).show();
-            ((StartActivity)getActivity()).replaceFragment(new StartFragment());
+            Date date = defaultFormat.parse(cita.getFecha());
+            etHora.setText(timeFormat.format(date));
+            etFecha.setText(dateFormat.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        etDescripcion.setText(cita.getNotas());
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean err = false;
@@ -102,10 +102,10 @@ public class CreateCitaFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                     return;
                 }
-                Cita cita = new Cita();
+
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                cita.setUserId(content[0]);
+
                 cita.setNotas(etDescripcion.getText().toString());
                 JSONObject json;
                 try {
@@ -121,32 +121,44 @@ public class CreateCitaFragment extends Fragment {
 
 
 
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL + "appointment/", json,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Toast.makeText(getContext(), "Cita creada exitosamente!", Toast.LENGTH_LONG).show();
-                                ((StartActivity)getActivity()).replaceFragment(new StartFragment());
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getContext(), "Porfavor intente mas tarde", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.PUT, URL + "appointment/" + cita.getId(), json,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Toast.makeText(getContext(), "Cita actualizada", Toast.LENGTH_LONG).show();
+                            ((MainActivity)getActivity()).replaceFragment(new ListaCitasFragment());
+                        }
+                    },
+                    new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Porfavor intente mas tarde", Toast.LENGTH_LONG).show();
+                    }
+                });
                 RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
                 rq.add(request);
             }
         });
-    }
 
-    private int calculateAge(String date) throws ParseException{
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        Date dob = inputFormat.parse(date);
-        LocalDate ldate = Instant.ofEpochMilli(dob.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate now1 = LocalDate.now();
-        Period diff1 = Period.between(ldate, now1);
-        return diff1.getYears();
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, URL + "appointment/" + cita.getId(), null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(getContext(), "Cita eliminada", Toast.LENGTH_LONG).show();
+                        ((MainActivity)getActivity()).replaceFragment(new ListaCitasFragment());
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Porfavor intente mas tarde", Toast.LENGTH_LONG).show();
+                    }
+                });
+                RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
+                rq.add(request);
+                ((MainActivity)getActivity()).replaceFragment(new ListaCitasFragment());
+            }
+        });
     }
 }

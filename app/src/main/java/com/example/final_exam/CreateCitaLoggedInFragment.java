@@ -16,20 +16,33 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.final_exam.Utils.MyApplication;
+import com.example.final_exam.types.Cita;
 import com.example.final_exam.types.User;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CreateCitaLoggedInFragment extends Fragment {
+    private static String URL = "https://final-exam-mobile.herokuapp.com/";
+
 
     private Bitmap bmp;
     private EditText etHora, etFecha, etDescripcion;
     private Button btnSubmit;
+    User myUser;
 
     public CreateCitaLoggedInFragment() {
         // Required empty public constructor
@@ -38,7 +51,7 @@ public class CreateCitaLoggedInFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        User myUser = MyApplication.getInstance().getMyUser();
+        myUser = MyApplication.getInstance().getMyUser();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         String date = inputFormat.format(myUser.getDob());
         String qrContent = myUser.getId() + "," + myUser.getName() +"," + date + ","+myUser.getAllergies() ;
@@ -89,7 +102,42 @@ public class CreateCitaLoggedInFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                     return;
                 }
-                // TODO: send data to server
+
+                Cita cita = new Cita();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                cita.setUserId(myUser.getId());
+                cita.setNotas(etDescripcion.getText().toString());
+                JSONObject json;
+                try {
+                    Date d = dateFormat.parse(etFecha.getText().toString());
+                    d.setHours(Integer.parseInt(etHora.getText().toString().split(":")[0]));
+                    d.setMinutes(Integer.parseInt(etHora.getText().toString().split(":")[1]));
+                    cita.setFecha(outputFormat.format(d));
+                    json = cita.getJSON();
+                } catch(Exception ex){
+                    Toast.makeText(getContext(), "Verifique la fecha y hora introducidos", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL + "appointment/", json,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Toast.makeText(getContext(), "Cita creada!", Toast.LENGTH_LONG).show();
+                                ((MainActivity)getActivity()).replaceFragment(new ListaCitasFragment());
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getContext(), "Porfavor intente mas tarde", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
+                rq.add(request);
             }
         });
     }

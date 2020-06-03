@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_cita_fecha"
+        android:id="@+id/et_update_fecha"
         android:layout_width="371dp"
         android:layout_height="50sp"
         android:layout_marginTop="12dp"
@@ -34,12 +34,12 @@
         android:textColor="@color/gray"
         android:textColorHint="@color/gray"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/et_cita_hora"
-        app:layout_constraintStart_toStartOf="@+id/et_cita_hora"
-        app:layout_constraintTop_toBottomOf="@+id/et_cita_hora" />
+        app:layout_constraintEnd_toEndOf="@+id/et_update_hora"
+        app:layout_constraintStart_toStartOf="@+id/et_update_hora"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_hora" />
 
     <EditText
-        android:id="@+id/et_cita_hora"
+        android:id="@+id/et_update_hora"
         android:layout_width="0dp"
         android:layout_height="50sp"
         android:layout_marginStart="16dp"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Button
-        android:id="@+id/btn_cita_submit"
+        android:id="@+id/btn_actualizar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -85,7 +85,7 @@
         android:background="@color/semi_light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_cita_descripcion">
+        app:layout_constraintTop_toBottomOf="@+id/et_update_descripcion">
 
         <TextView
             android:id="@+id/tv_cita_nombre"
@@ -163,20 +163,20 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/et_cita_descripcion"
+        android:id="@+id/et_update_descripcion"
         android:layout_width="0dp"
         android:layout_height="50sp"
         android:layout_marginTop="12dp"
         android:background="@drawable/input_field"
         android:ems="10"
         android:hint="Descripcion"
-        android:inputType="time"
+        android:inputType="text"
         android:minEms="10"
         android:textColor="@color/gray"
         android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="@+id/et_cita_fecha"
+        app:layout_constraintEnd_toEndOf="@+id/et_update_fecha"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_cita_fecha"
-        app:layout_constraintTop_toBottomOf="@+id/et_cita_fecha" />
+        app:layout_constraintStart_toStartOf="@+id/et_update_fecha"
+        app:layout_constraintTop_toBottomOf="@+id/et_update_fecha" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
