@@ -129,26 +129,23 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
     public void processJSON(JSONObject response) {
         try{
             JSONObject json = response;
-
             Log.d("Callback json", json.toString());
-
             try {
                 verifyUser(json);
             } catch(Exception e){
                 Toast.makeText(getContext(), "Usuario o contraseña incorrecto", Toast.LENGTH_SHORT).show();
                 Log.d("Error en verificacion", e.toString());
             }
-
-
         } catch(Exception e) {
             Log.d("Hubo un error", e.toString());
             e.printStackTrace();
         }
+        loginBtn.setEnabled(true);
     }
 
     @Override
     public void onError(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-        this.getView().setEnabled(true);
+        loginBtn.setEnabled(true);
     }
 }
