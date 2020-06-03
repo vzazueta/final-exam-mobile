@@ -23,7 +23,7 @@ public class RequestLogin implements Serializable {
     private final long serialVersionUID = 1L;
 
     static private Activity activity;
-    //private String URL = "https://final-exam-mobile.herokuapp.com/user/login";
+    //private String URL = String.valueOf(R.string.LOGIN_URL);
 
     public RequestLogin()
     {
@@ -34,9 +34,9 @@ public class RequestLogin implements Serializable {
         URL = URL+"/"+id+"/"+pass;
         activity = (Activity) t;
 
-        Log.d("New URL", URL);
+        Log.d(String.valueOf(R.string.NEW_URL_TAG), URL);
         RequestQueue queue = Volley.newRequestQueue(t);
-        Log.d("Request status", "Getting data from server. . .");
+        Log.d(String.valueOf(R.string.LOGIN_STATUS_TAG), String.valueOf(R.string.LOGIN_STATUS_MESSAGE));
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 URL, null,
@@ -44,14 +44,14 @@ public class RequestLogin implements Serializable {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("JSONObject", response.toString());
+                        Log.d(String.valueOf(R.string.REQUEST_RESPONSE_TAG), response.toString());
                         callback.processJSON(response);
                     }
                 }, new Response.ErrorListener() {
 
                 @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error in request", error.toString());
+                Log.d(String.valueOf(R.string.REQUEST_PROBLEM_TAG), error.toString());
             }
         });
 

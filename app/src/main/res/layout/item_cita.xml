@@ -15,11 +15,13 @@
         android:background="@drawable/round_rectangle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/tv_id"
+            android:id="@+id/tv_item_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -27,26 +29,25 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_genero"
-            app:layout_constraintStart_toEndOf="@+id/tv_genero"
-            app:layout_constraintTop_toTopOf="@+id/tv_genero" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_item_genero"
+            app:layout_constraintStart_toEndOf="@+id/tv_item_genero"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_genero" />
 
         <TextView
-            android:id="@+id/tv_nombre"
-            android:layout_width="0dp"
+            android:id="@+id/tv_item_nombre"
+            android:layout_width="379dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:text="@string/lorem_sh"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView18"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView14"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <TextView
-            android:id="@+id/tv_alergico"
+            android:id="@+id/tv_item_notas"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -61,32 +62,18 @@
             app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         <TextView
-            android:id="@+id/tv_hora"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/lorem_sh"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_dia"
-            app:layout_constraintStart_toEndOf="@+id/tv_dia"
-            app:layout_constraintTop_toTopOf="@+id/tv_dia" />
-
-        <TextView
-            android:id="@+id/tv_edad"
+            android:id="@+id/tv_item_edad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/lorem_sh"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView19"
             app:layout_constraintStart_toStartOf="@+id/textView18"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         <TextView
-            android:id="@+id/tv_genero"
+            android:id="@+id/tv_item_genero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -94,30 +81,33 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_edad"
-            app:layout_constraintStart_toEndOf="@+id/tv_edad"
-            app:layout_constraintTop_toTopOf="@+id/tv_edad" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_item_edad"
+            app:layout_constraintStart_toEndOf="@+id/tv_item_edad"
+            app:layout_constraintTop_toTopOf="@+id/tv_item_edad" />
+
 
         <TextView
-            android:id="@+id/tv_dia"
+            android:id="@+id/tv_item_fecha"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="28dp"
+            android:layout_marginStart="24dp"
+            android:gravity="bottom"
             android:text="@string/lorem_sh"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView20"
-            app:layout_constraintStart_toStartOf="@+id/textView19"
-            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+            app:layout_constraintBottom_toBottomOf="@+id/textView21"
+            app:layout_constraintStart_toEndOf="@+id/textView21"
+            app:layout_constraintTop_toTopOf="@+id/textView21" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/item_nombre"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/tv_nombre"
             app:layout_constraintStart_toStartOf="@+id/textView21"
             app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -129,9 +119,8 @@
             android:text="@string/item_edad"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/tv_edad"
-            app:layout_constraintStart_toStartOf="@+id/tv_nombre"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nombre" />
+            app:layout_constraintStart_toStartOf="@+id/tv_item_nombre"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_nombre" />
 
         <TextView
             android:id="@+id/textView16"
@@ -141,7 +130,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="@+id/textView18"
-            app:layout_constraintStart_toStartOf="@+id/tv_genero"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_genero"
             app:layout_constraintTop_toTopOf="@+id/textView18"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -153,47 +142,53 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="@+id/textView16"
-            app:layout_constraintStart_toStartOf="@+id/tv_id"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_id"
             app:layout_constraintTop_toTopOf="@+id/textView16"
             app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/tv_dia"
-            app:layout_constraintStart_toStartOf="@+id/tv_edad"
-            app:layout_constraintTop_toBottomOf="@+id/tv_edad"
-            tools:text="@string/item_fecha" />
 
         <TextView
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/item_alergico"
+            android:text="@string/item_notas"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/tv_alergico"
-            app:layout_constraintStart_toStartOf="@+id/tv_dia"
-            app:layout_constraintTop_toBottomOf="@+id/tv_dia" />
+            app:layout_constraintStart_toStartOf="@+id/tv_item_alergias"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_alergias" />
 
         <TextView
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
             android:text="@string/item_cita_title"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/alergias"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_edad"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_edad" />
+
+        <TextView
+            android:id="@+id/tv_item_alergias"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_sh"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
