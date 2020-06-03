@@ -24,12 +24,12 @@ export class AppointmentService {
     }
 
     async edit(id, appointmentDTO: AppointmentDTO): Promise<Appointment> {
-        const obj = await this.model.findOneAndUpdate({id:id}, appointmentDTO, {new: true});
+        const obj = await this.model.findOneAndUpdate({"_id":id}, appointmentDTO, {new: true});
         return obj;
     }
 
     async delete(id): Promise<Appointment> {
-        const obj = await this.model.findOneAndDelete({id:id});
+        const obj = await this.model.findOneAndDelete({"_id":id});
         return obj;
     }
 }
