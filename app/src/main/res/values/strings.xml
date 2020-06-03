@@ -43,4 +43,5 @@
     <string name="citas">Citas</string>
     <string name="nueva_cita">Nueva Cita</string>
     <string name="codigo_qr_si_desea_hacer_su_cita_en_su_clinica">Codigo QR si desea hacer su cita en el hospital:</string>
+    <string name="cancelado">Cancelado</string>
 </resources>

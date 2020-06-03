@@ -1,4 +1,4 @@
-package com.example.final_exam;
+package com.example.final_exam.Utils;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -52,6 +52,7 @@ public class RequestLogin implements Serializable {
                 @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Error in request", error.toString());
+                callback.onError("Hubo un error, porfavor intent mas tarde");
             }
         });
 
@@ -60,6 +61,6 @@ public class RequestLogin implements Serializable {
 
     public interface Callback {
         void processJSON(JSONObject response);
-        void onError();
+        void onError(String message);
     }
 }

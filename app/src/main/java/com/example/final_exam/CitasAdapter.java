@@ -1,17 +1,15 @@
 package com.example.final_exam;
 
 import android.content.Context;
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
+import com.example.final_exam.types.Cita;
+
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;

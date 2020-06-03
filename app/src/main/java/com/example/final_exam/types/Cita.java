@@ -1,4 +1,6 @@
-package com.example.final_exam;
+package com.example.final_exam.types;
+
+import com.example.final_exam.types.User;
 
 public class Cita {
 

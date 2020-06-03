@@ -16,7 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
+import com.example.final_exam.Utils.MyApplication;
+import com.example.final_exam.Utils.RequestLogin;
+import com.example.final_exam.types.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -145,7 +147,8 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
     }
 
     @Override
-    public void onError() {
-
+    public void onError(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        this.getView().setEnabled(true);
     }
 }

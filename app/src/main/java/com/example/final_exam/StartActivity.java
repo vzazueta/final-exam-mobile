@@ -1,10 +1,13 @@
 package com.example.final_exam;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -42,4 +45,21 @@ public class StartActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 9876) {
+            if (resultCode == RESULT_OK) {
+                String contents = data.getStringExtra("SCAN_RESULT");
+                Bundle bundle = new Bundle();
+                bundle.putString("content", contents);
+                CreateCitaFragment fragment = new CreateCitaFragment();
+                fragment.setArguments(bundle);
+                this.replaceFragment(fragment);
+            }
+            if(resultCode == RESULT_CANCELED){
+                Toast.makeText(this, getString(R.string.cancelado), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

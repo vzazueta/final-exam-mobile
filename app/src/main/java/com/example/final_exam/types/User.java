@@ -1,4 +1,4 @@
-package com.example.final_exam;
+package com.example.final_exam.types;
 
 import java.util.Date;
 

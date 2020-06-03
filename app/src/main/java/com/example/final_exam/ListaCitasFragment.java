@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.JsonObject;
+import com.example.final_exam.Utils.MyApplication;
+import com.example.final_exam.Utils.ReqFromServer;
+import com.example.final_exam.types.Cita;
+import com.example.final_exam.types.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
