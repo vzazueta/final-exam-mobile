@@ -17,7 +17,7 @@
         android:background="@drawable/input_field"
         android:ems="10"
         android:hint="Fecha"
-        android:inputType="date"
+        android:inputType="text"
         android:minEms="10"
         android:textColor="@color/gray"
         android:textColorHint="@color/gray"
