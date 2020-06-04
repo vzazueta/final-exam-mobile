@@ -2,11 +2,14 @@ package com.example.final_exam;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -23,7 +26,7 @@ public class RequestLogin implements Serializable {
     private final long serialVersionUID = 1L;
 
     static private Activity activity;
-    //private String URL = String.valueOf(R.string.LOGIN_URL);
+    //private String URL = t.getString(R.string.LOGIN_URL);
 
     public RequestLogin()
     {
@@ -34,9 +37,9 @@ public class RequestLogin implements Serializable {
         URL = URL+"/"+id+"/"+pass;
         activity = (Activity) t;
 
-        Log.d(String.valueOf(R.string.NEW_URL_TAG), URL);
+        Log.d(t.getString(R.string.NEW_URL_TAG), URL);
         RequestQueue queue = Volley.newRequestQueue(t);
-        Log.d(String.valueOf(R.string.LOGIN_STATUS_TAG), String.valueOf(R.string.LOGIN_STATUS_MESSAGE));
+        Log.d(t.getString(R.string.LOGIN_STATUS_TAG), t.getString(R.string.LOGIN_STATUS_MESSAGE));
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 URL, null,
@@ -44,16 +47,23 @@ public class RequestLogin implements Serializable {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d(String.valueOf(R.string.REQUEST_RESPONSE_TAG), response.toString());
+                        Log.d(t.getString(R.string.REQUEST_RESPONSE_TAG), response.toString());
                         callback.processJSON(response);
                     }
                 }, new Response.ErrorListener() {
 
                 @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(String.valueOf(R.string.REQUEST_PROBLEM_TAG), error.toString());
+                Log.d(t.getString(R.string.REQUEST_PROBLEM_TAG), error.toString());
+                    Toast.makeText(t, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                2000,
+                1000,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
 
         queue.add(request);
     }

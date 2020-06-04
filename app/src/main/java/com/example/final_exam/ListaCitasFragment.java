@@ -1,7 +1,9 @@
 package com.example.final_exam;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,13 +28,19 @@ import java.util.List;
 
 public class ListaCitasFragment extends Fragment {
     List<Cita> citas;
-    private static final String APPOINTMENT_ID_USER = String.valueOf(R.string.JSON_APPOINTMENT_USER_ID);
-    private static final String APPOINTMENT_DATE = String.valueOf(R.string.JSON_APPOINTMENT_DATE);
-    private static final String APPOINTMENT_DESCRIPTION = String.valueOf(R.string.JSON_APPOINTMENT_DESCRITPION);
+    private String APPOINTMENT_ID_USER;
+    private String APPOINTMENT_DATE;
+    private String APPOINTMENT_DESCRIPTION;
     private String category;
     private CitasAdapter adapter;
     RecyclerView rv_menu;
     JSONArray jsonArray;
+
+    public ListaCitasFragment(Context context){
+        APPOINTMENT_ID_USER = context.getString(R.string.JSON_APPOINTMENT_USER_ID);
+        APPOINTMENT_DATE = context.getString(R.string.JSON_APPOINTMENT_DATE);
+        APPOINTMENT_DESCRIPTION = context.getString(R.string.JSON_APPOINTMENT_DESCRITPION);
+    }
 
     ReqFromServer.Callback callbackServer = new ReqFromServer.Callback() {
         @Override
@@ -62,7 +70,7 @@ public class ListaCitasFragment extends Fragment {
             Cita cita = new Cita();
             cita.setUser(myUser);
             String strDateCita = jsonObject.getString(APPOINTMENT_DATE);
-            SimpleDateFormat inputFormat = new SimpleDateFormat(String.valueOf(R.string.DATE_FORMAT));
+            SimpleDateFormat inputFormat = new SimpleDateFormat(getContext().getString(R.string.DATE_FORMAT));
             Date dateCita = inputFormat.parse(strDateCita);
             cita.setFecha(dateCita.toString());
             cita.setNotas(jsonObject.getString(APPOINTMENT_DESCRIPTION));

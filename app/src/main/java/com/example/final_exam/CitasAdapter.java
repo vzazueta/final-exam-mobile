@@ -23,13 +23,10 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
     private Context context;
     private List<Cita> citas;
 
-
     public CitasAdapter(Context context, List<Cita> c) {
         this.context = context;
         this.citas = c;
     }
-
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -45,7 +42,6 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() { return citas.size(); }
-
 
     public List<Cita> getCitas() {
         return citas;

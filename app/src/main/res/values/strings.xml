@@ -54,7 +54,8 @@
 
     <string name="alphanumeric_string">0ABC1DEF2GHI3JKL4MNO5PQR6STU7VWX8YZ9</string>
 
-    <string name="SERVER_URL">https://final-exam-mobile.herokuapp.com/appointment</string>
+    <string name="APPOINTMENT_URL">https://final-exam-mobile.herokuapp.com/appointment</string>
+    <string name="LOGIN_URL">https://final-exam-mobile.herokuapp.com/user/login</string>
     <string name="DEFAULT_ID">MOA980107ABC</string>
     <string name="DEFAULT_PASSWORD">ivan</string>
 
@@ -70,7 +71,7 @@
     <string name="JSON_USER_PASSWORD">password</string>
     <string name="JSON_USER_ALLERGIC">allergic</string>
     <string name="JSON_USER_ALLERGIC_DESCRIPTION">allergic_description</string>
-    <string name="JSON_USER_GENDER">geneder</string>
+    <string name="JSON_USER_GENDER">gender</string>
     <string name="JSON_USER_ID">id</string>
     <string name="JSON_USER_NAME">name</string>
 

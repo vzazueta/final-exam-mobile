@@ -26,13 +26,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setViewComponents();
 
-        setTint( R.id.iv_list_cita_icon, R.color.red_accent_3);
-
-
         if (findViewById(R.id.fragment_container_menu) != null) {
             if (savedInstanceState != null) return;
             // Create a new Fragment to be placed in the activity layout
-            ListaCitasFragment firstFragment = new ListaCitasFragment();
+            ListaCitasFragment firstFragment = new ListaCitasFragment(getApplicationContext());
 
             // In case this activity was started with special instructions from an
             firstFragment.setArguments(getIntent().getExtras());
@@ -51,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.page_1:
-                            replaceFragment( new ListaCitasFragment());
+                            replaceFragment( new ListaCitasFragment(getApplicationContext()));
                             return true;
                         case R.id.page_2:
                             replaceFragment( new MapFragment());
@@ -64,27 +61,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
     }
-
-
-    public void setSelected(int i) {
-        setTint( R.id.iv_map_icon,  R.color.white);
-        setTint( R.id.iv_create_icon,   R.color.white);
-        setTint( R.id.iv_list_cita_icon,   R.color.white);
-        setTint( i,  R.color.red_accent_3);
-        switch (i) {
-            case R.id.iv_map_icon:
-                replaceFragment(new MapFragment());
-                break;
-            case R.id.iv_create_icon:
-                replaceFragment(new CreateCitaFragment());
-                break;
-            case R.id.iv_list_cita_icon:
-            default:
-                replaceFragment(new ListaCitasFragment());
-                break;
-        }
-    }
-
 
     public void setTint(int id, int color){
         ((ImageView)(findViewById(id))).setColorFilter(ContextCompat.getColor(this, color));

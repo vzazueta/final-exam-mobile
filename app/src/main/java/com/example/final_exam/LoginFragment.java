@@ -40,8 +40,7 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
     JSONArray jsonArray;
     List<String[]> patient_list;
     private EditText userET, passET;
-    private String URL = String.valueOf(R.string.SERVER_URL);;
-    private boolean userExists = false, firstTry = true;
+    private static String URL;
 
 
     Button loginBtn;
@@ -75,6 +74,7 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
 
         userET = getView().findViewById(R.id.user_edit_text);
         passET = getView().findViewById(R.id.password_edit_text);
+        URL = getString(R.string.LOGIN_URL);
         loginBtn.setEnabled(true);
     }
 
@@ -84,12 +84,12 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
                 String ID = userET.getText().toString();
                 String password = passET.getText().toString();
                 if(ID.equals("")){
-                    ID = String.valueOf(R.string.DEFAULT_ID);
-                    password = String.valueOf(R.string.DEFAULT_PASSWORD);
+                    ID = getString(R.string.DEFAULT_ID);
+                    password = getString(R.string.DEFAULT_PASSWORD);
                 }
                 view.setEnabled(false);
                 getRequestFrag(ID, password);
-                Toast.makeText(view.getContext(), String.valueOf(R.string.WAITING_TOAST), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), getString(R.string.WAITING_TOAST), Toast.LENGTH_SHORT).show();
             }
     };
 
@@ -98,11 +98,11 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
     }
 
     private void verifyUser(JSONObject json) throws JSONException, ParseException {
-        String id = json.getString(String.valueOf(R.string.JSON_USER_ID));
-        String pass = json.getString(String.valueOf(R.string.JSON_USER_PASSWORD));
+        String id = json.getString(getString(R.string.JSON_USER_ID));
+        String pass = json.getString(getString(R.string.JSON_USER_PASSWORD));
         if(!(id.equals("") || pass.equals(""))){
             setUser(json);
-            Log.d(String.valueOf(R.string.LOGIN_SUCCESS_TAG), "\nID: "+id+"\nPassword: "+pass);
+            Log.d(getString(R.string.LOGIN_SUCCESS_TAG), "\nID: "+id+"\nPassword: "+pass);
             Intent i = new Intent(LoginFragment.this.getActivity(), MainActivity.class);
             LoginFragment.this.startActivity(i);
         }
@@ -113,16 +113,16 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
         app.setMyUser(new User());
         User myUser = app.getMyUser();
 
-        String strDob = json.getString(String.valueOf(R.string.JSON_USER_BIRTHDATE));
-        SimpleDateFormat inputFormat = new SimpleDateFormat(String.valueOf(R.string.DATE_FORMAT));
+        String strDob = json.getString(getString(R.string.JSON_USER_BIRTHDATE));
+        SimpleDateFormat inputFormat = new SimpleDateFormat(getString(R.string.DATE_FORMAT));
         Date dob = inputFormat.parse(strDob);
         myUser.setDob(dob);
 
-        myUser.setAllergic(json.getBoolean(String.valueOf(R.string.JSON_USER_ALLERGIC)));
-        myUser.setAllergies(json.getString(String.valueOf(R.string.JSON_USER_ALLERGIC_DESCRIPTION)));
-        myUser.setGender(json.getString(String.valueOf(R.string.JSON_USER_GENDER)));
-        myUser.setId(json.getString(String.valueOf(R.string.JSON_USER_ID)));
-        myUser.setName(json.getString(String.valueOf(R.string.JSON_USER_NAME)));
+        myUser.setAllergic(json.getBoolean(getString(R.string.JSON_USER_ALLERGIC)));
+        myUser.setAllergies(json.getString(getString(R.string.JSON_USER_ALLERGIC_DESCRIPTION)));
+        myUser.setGender(json.getString(getString(R.string.JSON_USER_GENDER)));
+        myUser.setId(json.getString(getString(R.string.JSON_USER_ID)));
+        myUser.setName(json.getString(getString(R.string.JSON_USER_NAME)));
 
     }
 
@@ -132,18 +132,18 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
         try{
             JSONObject json = response;
 
-            Log.d(String.valueOf(R.string.CALLBACK_JSON_RESPONSE_TAG), json.toString());
+            Log.d(getString(R.string.CALLBACK_JSON_RESPONSE_TAG), json.toString());
 
             try {
                 verifyUser(json);
             } catch(Exception e){
-                Toast.makeText(getContext(), String.valueOf(R.string.LOGIN_ERROR_TOAST), Toast.LENGTH_SHORT).show();
-                Log.d(String.valueOf(R.string.VERIFICATION_ERROR_TAG), e.toString());
+                Toast.makeText(getContext(), getString(R.string.LOGIN_ERROR_TOAST), Toast.LENGTH_SHORT).show();
+                Log.d(getString(R.string.VERIFICATION_ERROR_TAG), e.toString());
             }
 
 
         } catch(Exception e) {
-            Log.d(String.valueOf(R.string.GENERAL_CALLBACK_ERROR_TAG), e.toString());
+            Log.d(getString(R.string.GENERAL_CALLBACK_ERROR_TAG), e.toString());
             e.printStackTrace();
         }
     }
