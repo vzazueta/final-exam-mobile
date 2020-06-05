@@ -108,4 +108,15 @@
     <string name="descripcion">Descripcion</string>
     <string name="agendar">Agendar</string>
 
+    <string name="error1">Porfavor ingrese: </string>
+    <string name="error2">Hora de cita</string>
+    <string name="error3">Fecha de cita</string>
+    <string name="error4">Motivo de cita</string>
+    <string name="error5">Verifique la fecha y hora introducidos</string>
+    <string name="success">Cita creada exitosamente!</string>
+    <string name="update">Cita actualizada exitosamente!</string>
+    <string name="delete">Cita eliminada exitosamente!</string>
+    <string name="mas_tarde">Porfavor intente mas tarde</string>
+
+
 </resources>

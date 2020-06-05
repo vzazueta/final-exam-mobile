@@ -85,18 +85,18 @@ public class CreateCitaLoggedInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 boolean err = false;
-                String message = "Porfavor ingrese: ";
+                String message = getContext().getString(R.string.error1);
                 if(etHora.getText().toString().equals("")){
                     err = true;
-                    message += "\nHora de cita";
+                    message += "\n"+getContext().getString(R.string.error2);
                 }
                 if(etFecha.getText().toString().equals("")){
                     err = true;
-                    message += "\nFecha de cita";
+                    message += "\n"+getContext().getString(R.string.error3);
                 }
                 if(etDescripcion.getText().toString().equals("")){
                     err = true;
-                    message += "\nMotivo de cita";
+                    message += "\n"+getContext().getString(R.string.error4);
                 }
                 if(err){
                     Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
@@ -116,7 +116,7 @@ public class CreateCitaLoggedInFragment extends Fragment {
                     cita.setFecha(outputFormat.format(d));
                     json = cita.getJSON();
                 } catch(Exception ex){
-                    Toast.makeText(getContext(), "Verifique la fecha y hora introducidos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),  getContext().getString(R.string.error5), Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -126,14 +126,14 @@ public class CreateCitaLoggedInFragment extends Fragment {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Toast.makeText(getContext(), "Cita creada!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getContext().getString(R.string.success), Toast.LENGTH_LONG).show();
                                 ((MainActivity)getActivity()).setSelectedMenu(R.id.page_1);
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getContext(), "Porfavor intente mas tarde", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getContext(), getContext().getString(R.string.mas_tarde), Toast.LENGTH_LONG).show();
                             }
                         });
                 RequestQueue rq = Volley.newRequestQueue(getActivity().getApplicationContext());
