@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -19,6 +20,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView menu;
+    Fragment current;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +66,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void replaceFragment(Fragment newFragment){
-        // Create fragment and give it an argument specifying the article it should show
-
+        current = newFragment;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
         transaction.replace(R.id.fragment_container_menu, newFragment);
         transaction.addToBackStack(null);
-
-        // Commit the transaction
         transaction.commit();
     }
 
+    public void setSelectedMenu(int a){
+        menu.setSelectedItemId(a);
+    }
 
+    @Override
+    public void onBackPressed() {
+        if(current instanceof ListaCitasFragment){
+            Intent i = new Intent(this, StartActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            this.startActivity(i);
+            return;
+        }
+        setSelectedMenu(R.id.page_1);
+    }
 }

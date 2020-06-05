@@ -127,7 +127,7 @@ public class CreateCitaLoggedInFragment extends Fragment {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Toast.makeText(getContext(), "Cita creada!", Toast.LENGTH_LONG).show();
-                                ((MainActivity)getActivity()).replaceFragment(new ListaCitasFragment());
+                                ((MainActivity)getActivity()).setSelectedMenu(R.id.page_1);
                             }
                         },
                         new Response.ErrorListener() {
