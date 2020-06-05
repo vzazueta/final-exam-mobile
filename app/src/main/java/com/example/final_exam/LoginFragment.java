@@ -35,13 +35,14 @@ import java.util.List;
  * Use the {@link LoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+
 public class LoginFragment extends Fragment implements RequestLogin.Callback {
 
     JSONArray jsonArray;
     List<String[]> patient_list;
     private EditText userET, passET;
-    private String URL = "https://final-exam-mobile.herokuapp.com/user/login";
-    private boolean userExists = false, firstTry = true;
+    private static String URL;
 
 
     Button loginBtn;
@@ -51,13 +52,15 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
     }
 
     // TODO: Rename and change types and number of parameters
+
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
 
-    @Override
+
     public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +76,7 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
 
         userET = getView().findViewById(R.id.user_edit_text);
         passET = getView().findViewById(R.id.password_edit_text);
+        URL = getString(R.string.LOGIN_URL);
         loginBtn.setEnabled(true);
     }
 
@@ -82,12 +86,12 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
                 String ID = userET.getText().toString();
                 String password = passET.getText().toString();
                 if(ID.equals("")){
-                    ID = "MOA980107ABC";
-                    password = "ivan";
+                    ID = getString(R.string.DEFAULT_ID);
+                    password = getString(R.string.DEFAULT_PASSWORD);
                 }
                 view.setEnabled(false);
                 getRequestFrag(ID, password);
-                Toast.makeText(view.getContext(), "Conectando a sistema. \nEspere unos segundos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), getString(R.string.WAITING_TOAST), Toast.LENGTH_SHORT).show();
             }
     };
 
@@ -96,31 +100,31 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
     }
 
     private void verifyUser(JSONObject json) throws JSONException, ParseException {
-        String id = json.getString("id");
-        String pass = json.getString("password");
+        String id = json.getString(getString(R.string.JSON_USER_ID));
+        String pass = json.getString(getString(R.string.JSON_USER_PASSWORD));
         if(!(id.equals("") || pass.equals(""))){
             setUser(json);
-            Log.d("Success", "\nID: "+id+"\nPassword: "+pass);
+            Log.d(getString(R.string.LOGIN_SUCCESS_TAG), "\nID: "+id+"\nPassword: "+pass);
             Intent i = new Intent(LoginFragment.this.getActivity(), MainActivity.class);
             LoginFragment.this.startActivity(i);
         }
     }
 
-    private void setUser(JSONObject json)throws JSONException, ParseException{
+    private void setUser(JSONObject json) throws JSONException, ParseException{
         MyApplication app = MyApplication.getInstance();
         app.setMyUser(new User());
         User myUser = app.getMyUser();
 
-        String strDob = json.getString("birthdate");
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        String strDob = json.getString(getString(R.string.JSON_USER_BIRTHDATE));
+        SimpleDateFormat inputFormat = new SimpleDateFormat(getString(R.string.DATE_FORMAT));
         Date dob = inputFormat.parse(strDob);
         myUser.setDob(dob);
 
-        myUser.setAllergic(json.getBoolean("allergic"));
-        myUser.setAllergies(json.getString("allergic_description"));
-        myUser.setGender(json.getString("gender"));
-        myUser.setId(json.getString("id"));
-        myUser.setName(json.getString("name"));
+        myUser.setAllergic(json.getBoolean(getString(R.string.JSON_USER_ALLERGIC)));
+        myUser.setAllergies(json.getString(getString(R.string.JSON_USER_ALLERGIC_DESCRIPTION)));
+        myUser.setGender(json.getString(getString(R.string.JSON_USER_GENDER)));
+        myUser.setId(json.getString(getString(R.string.JSON_USER_ID)));
+        myUser.setName(json.getString(getString(R.string.JSON_USER_NAME)));
 
     }
 
@@ -129,15 +133,15 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
     public void processJSON(JSONObject response) {
         try{
             JSONObject json = response;
-            Log.d("Callback json", json.toString());
+            Log.d(getString(R.string.CALLBACK_JSON_RESPONSE_TAG), json.toString());
             try {
                 verifyUser(json);
             } catch(Exception e){
-                Toast.makeText(getContext(), "Usuario o contraseña incorrecto", Toast.LENGTH_SHORT).show();
-                Log.d("Error en verificacion", e.toString());
+                Toast.makeText(getContext(), getString(R.string.LOGIN_ERROR_TOAST), Toast.LENGTH_SHORT).show();
+                Log.d(getString(R.string.VERIFICATION_ERROR_TAG), e.toString());
             }
         } catch(Exception e) {
-            Log.d("Hubo un error", e.toString());
+            Log.d(getString(R.string.GENERAL_CALLBACK_ERROR_TAG), e.toString());
             e.printStackTrace();
         }
         loginBtn.setEnabled(true);

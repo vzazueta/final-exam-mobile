@@ -2,15 +2,19 @@ package com.example.final_exam.Utils;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.final_exam.R;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -23,7 +27,7 @@ public class RequestLogin implements Serializable {
     private final long serialVersionUID = 1L;
 
     static private Activity activity;
-    //private String URL = "https://final-exam-mobile.herokuapp.com/user/login";
+    //private String URL = t.getString(R.string.LOGIN_URL);
 
     public RequestLogin()
     {
@@ -34,9 +38,9 @@ public class RequestLogin implements Serializable {
         URL = URL+"/"+id+"/"+pass;
         activity = (Activity) t;
 
-        Log.d("New URL", URL);
+        Log.d(t.getString(R.string.NEW_URL_TAG), URL);
         RequestQueue queue = Volley.newRequestQueue(t);
-        Log.d("Request status", "Getting data from server. . .");
+        Log.d(t.getString(R.string.LOGIN_STATUS_TAG), t.getString(R.string.LOGIN_STATUS_MESSAGE));
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,
                 URL, null,
@@ -44,17 +48,23 @@ public class RequestLogin implements Serializable {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("JSONObject", response.toString());
+                        Log.d(t.getString(R.string.REQUEST_RESPONSE_TAG), response.toString());
                         callback.processJSON(response);
                     }
                 }, new Response.ErrorListener() {
 
                 @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error in request", error.toString());
-                callback.onError("Hubo un error, porfavor intent mas tarde");
+                Log.d(t.getString(R.string.REQUEST_PROBLEM_TAG), error.toString());
+                callback.onError(t.getString(R.string.GENERIC_ERROR));
             }
         });
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                2000,
+                1000,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
 
         queue.add(request);
     }

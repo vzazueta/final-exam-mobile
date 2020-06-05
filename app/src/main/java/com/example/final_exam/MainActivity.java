@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Build;
 import android.os.Bundle;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,18 +20,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView menu;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         setViewComponents();
 
         if (findViewById(R.id.fragment_container_menu) != null) {
             if (savedInstanceState != null) return;
             // Create a new Fragment to be placed in the activity layout
-            ListaCitasFragment firstFragment = new ListaCitasFragment();
+            ListaCitasFragment firstFragment = new ListaCitasFragment(getApplicationContext());
 
             // In case this activity was started with special instructions from an
             firstFragment.setArguments(getIntent().getExtras());
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.page_1:
-                            replaceFragment( new ListaCitasFragment());
+                            replaceFragment( new ListaCitasFragment(getApplicationContext()));
                             return true;
                         case R.id.page_2:
                             replaceFragment( new MapFragment());

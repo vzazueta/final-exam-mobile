@@ -53,7 +53,7 @@ public class MapFragment extends Fragment  implements OnMapReadyCallback {
     private GoogleMap mMap;
     private Marker marker;
     private FusedLocationProviderClient fusedLocationClient;
-    private static final String LogTag = "MAP_FRAGMENT";
+    private static final String LogTag = String.valueOf(R.string.LOG_TAG_MAP);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,12 +83,12 @@ public class MapFragment extends Fragment  implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        Log.d(LogTag, "map ready");
+        Log.d(LogTag, String.valueOf(R.string.MAP_READY_MESSAGE));
         fusedLocationClient.getLastLocation()
             .addOnSuccessListener(new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
-                    Log.d(LogTag, "success finding location");
+                    Log.d(LogTag, String.valueOf(R.string.LOCATION_FOUND_MESSAGE));
                     Log.d(LogTag, location.toString());
                     String userLocation = location.getLatitude() + ", " + location.getLongitude();
                     String hospitalLocation = 20.6857977 + ", " + -103.3463132;
@@ -119,11 +119,11 @@ public class MapFragment extends Fragment  implements OnMapReadyCallback {
 
 
     private void drawRoute(GoogleMap googleMap, String start, String end){
-        Log.d(LogTag, "drawing route");
+        Log.d(LogTag, String.valueOf(R.string.DRAWING_ROUTE_INITIAL_MESSAGE));
 
         googleMap.clear();
 
-        Log.d("MAPPING_KEY", getResources().getString(R.string.maps_key));
+        Log.d(String.valueOf(R.string.MAPPING_KEY_TAG), getResources().getString(R.string.maps_key));
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey(getResources().getString(R.string.maps_key))
                 .build();
@@ -202,7 +202,7 @@ public class MapFragment extends Fragment  implements OnMapReadyCallback {
                 Toast.makeText(getActivity(), getResources().getString(R.string.maps_error), Toast.LENGTH_SHORT).show();
             }
         } catch(Exception e) {
-            Log.e(LogTag, "ALGO FALLO");
+            Log.e(LogTag, String.valueOf(R.string.DRAWING_ROUTE_EXCEPTION_MESSAGE));
             Log.e(LogTag, e.toString());
         }
 

@@ -44,7 +44,6 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
     @Override
     public int getItemCount() { return citas.size(); }
 
-
     public List<Cita> getCitas() {
         return citas;
     }

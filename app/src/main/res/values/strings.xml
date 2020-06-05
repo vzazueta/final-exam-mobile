@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Final_exam</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="map_direction_title">Hospital Civil\nFray Antonio Alcalde</string>
     <string name="map_direction_direction">Coronel Calderón 777El Retiro\nCP: 44280 Guadalajara, Jal. </string>
@@ -11,7 +10,6 @@
 
     <string name="hospital_name">Hospital Civil\nGuadalajara</string>
     <string name="menu_title">Hospital Civil</string>
-
     <string name="login_id">ID</string>
     <string name="login_password">Contraseña</string>
 
@@ -32,6 +30,13 @@
     <string name="date">Fecha:</string>
     <string name="time">Hora:</string>
 
+    <string name="schedule_button_text">Agendar</string>
+    <string name="hour_edit_text_hint">Hora</string>
+    <string name="date_edit_text_hint">Fecha</string>
+    <string name="user_edit_text_hint">Usuario</string>
+    <string name="password_edit_text_hint">Contraseña</string>
+    <string name="welcome_text_view_message">¡Bienvenido!</string>
+
     <string name="qr">Sección para añadir camara embebida o QR</string>
 
     <string name="maps_hospital_tag">Hospital:&#160;</string>
@@ -45,9 +50,62 @@
     <string name="codigo_qr_si_desea_hacer_su_cita_en_su_clinica">Codigo QR si desea hacer su cita en el hospital:</string>
     <string name="cancelado">Cancelado</string>
     <string name="actualiza_cita">actualiza cita</string>
-    <string name="fecha">Fecha</string>
-    <string name="hora">Hora</string>
     <string name="actualizar">Actualizar</string>
     <string name="eliminar">Eliminar</string>
+
+    <string name="emergency_telephone">tel:3334486232</string>
+
+    <string name="alphanumeric_string">0ABC1DEF2GHI3JKL4MNO5PQR6STU7VWX8YZ9</string>
+
+    <string name="APPOINTMENT_URL">https://final-exam-mobile.herokuapp.com/appointment</string>
+    <string name="LOGIN_URL">https://final-exam-mobile.herokuapp.com/user/login</string>
+    <string name="DEFAULT_ID">MOA980107ABC</string>
+    <string name="DEFAULT_PASSWORD">ivan</string>
+
+    <string name="WAITING_TOAST">Conectando a sistema.
+        Espere unos segundos.</string>
+    <string name="LOGIN_ERROR_TOAST">Usuario o contraseña incorrecto.</string>
+
+    <string name="VERIFICATION_ERROR_TAG">Error en verificacion</string>
+    <string name="GENERAL_CALLBACK_ERROR_TAG">Error en verificacion</string>
+    <string name="CALLBACK_JSON_RESPONSE_TAG">Callback json</string>
+
+    <string name="JSON_USER_BIRTHDATE">birthdate</string>
+    <string name="JSON_USER_PASSWORD">password</string>
+    <string name="JSON_USER_ALLERGIC">allergic</string>
+    <string name="JSON_USER_ALLERGIC_DESCRIPTION">allergic_description</string>
+    <string name="JSON_USER_GENDER">gender</string>
+    <string name="JSON_USER_ID">id</string>
+    <string name="JSON_USER_NAME">name</string>
+
+    <string name="JSON_APPOINTMENT_USER_ID">user_id</string>
+    <string name="JSON_APPOINTMENT_DATE">date</string>
+    <string name="JSON_APPOINTMENT_DESCRITPION">description</string>
+
+    <string name="DRAWING_ROUTE_INITIAL_MESSAGE">drawing_route</string>
+    <string name="DRAWING_ROUTE_EXCEPTION_MESSAGE">ALGO FALLO</string>
+    <string name="MAPPING_KEY_TAG">MAPPING_KEY</string>
+    <string name="MAP_READY_MESSAGE">map ready</string>
+    <string name="LOG_TAG_MAP">MAP FRAGMENT</string>
+    <string name="LOCATION_FOUND_MESSAGE">Success finding location</string>
+
+    <string name="REQUEST_RESPONSE_TAG">Response</string>
+    <string name="REQUEST_PROBLEM_TAG">Problem</string>
+    <string name="REQUEST_PROBLEM_MESSAGE">Cannot connect to server</string>
+
+    <string name="NEW_URL_TAG">New URL</string>
+    <string name="LOGIN_STATUS_TAG">Request status</string>
+    <string name="LOGIN_STATUS_MESSAGE">Getting data from server. . .</string>
+
+    <string name="LOGIN_SUCCESS_TAG">Success</string>
+
+    <string name="DATE_FORMAT">yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'</string>
+    <string name="APPOINTMENT_ID">_id</string>
+
+    <string name="GENERIC_ERROR">Hubo un error, porfavor intente mas tarde</string>
+    <string name="hora">Hora</string>
+    <string name="fecha">Fecha</string>
     <string name="descripcion">Descripcion</string>
+    <string name="agendar">Agendar</string>
+
 </resources>
