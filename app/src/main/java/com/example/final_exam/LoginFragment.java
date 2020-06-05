@@ -16,7 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
+import com.example.final_exam.Utils.MyApplication;
+import com.example.final_exam.Utils.RequestLogin;
+import com.example.final_exam.types.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -131,25 +133,23 @@ public class LoginFragment extends Fragment implements RequestLogin.Callback {
     public void processJSON(JSONObject response) {
         try{
             JSONObject json = response;
-
             Log.d(getString(R.string.CALLBACK_JSON_RESPONSE_TAG), json.toString());
-
             try {
                 verifyUser(json);
             } catch(Exception e){
                 Toast.makeText(getContext(), getString(R.string.LOGIN_ERROR_TOAST), Toast.LENGTH_SHORT).show();
                 Log.d(getString(R.string.VERIFICATION_ERROR_TAG), e.toString());
             }
-
-
         } catch(Exception e) {
             Log.d(getString(R.string.GENERAL_CALLBACK_ERROR_TAG), e.toString());
             e.printStackTrace();
         }
+        loginBtn.setEnabled(true);
     }
 
     @Override
-    public void onError() {
-
+    public void onError(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        loginBtn.setEnabled(true);
     }
 }

@@ -54,16 +54,12 @@ public class MainActivity extends AppCompatActivity {
                             replaceFragment( new MapFragment());
                             return true;
                         case R.id.page_3:
-                            replaceFragment( new CreateCitaFragment());
+                            replaceFragment( new CreateCitaLoggedInFragment());
                             return true;
                     }
                     return false;
                 }
             });
-    }
-
-    public void setTint(int id, int color){
-        ((ImageView)(findViewById(id))).setColorFilter(ContextCompat.getColor(this, color));
     }
 
     public void replaceFragment(Fragment newFragment){

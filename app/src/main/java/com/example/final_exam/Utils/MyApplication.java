@@ -1,6 +1,8 @@
-package com.example.final_exam;
+package com.example.final_exam.Utils;
 
 import android.app.Application;
+
+import com.example.final_exam.types.User;
 
 public class MyApplication extends Application {
     private User myUser;

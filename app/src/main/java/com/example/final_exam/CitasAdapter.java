@@ -1,17 +1,16 @@
 package com.example.final_exam;
 
 import android.content.Context;
-import android.os.Build;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
+import com.example.final_exam.types.Cita;
+
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Period;
@@ -22,10 +21,12 @@ import java.util.List;
 public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> {
     private Context context;
     private List<Cita> citas;
+    public MainActivity activity;
 
-    public CitasAdapter(Context context, List<Cita> c) {
+    public CitasAdapter(Context context, List<Cita> c, MainActivity activity) {
         this.context = context;
         this.citas = c;
+        this.activity = activity;
     }
 
     @Override
@@ -54,9 +55,11 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvName,tvEdad, tvGenero, tvId, tvFecha, tvNotas, tvAlergias;
+        private View view;
 
-        public ViewHolder( View view) {
+        ViewHolder( View view) {
             super(view);
+            this.view = view;
             tvName = view.findViewById(R.id.tv_item_nombre);
             tvEdad = view.findViewById(R.id.tv_item_edad);
             tvGenero = view.findViewById(R.id.tv_item_genero);
@@ -67,7 +70,7 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
         }
 
 
-        public void bind(final Cita c){
+        void bind(final Cita c){
             tvName.setText(c.getUser().getName());
             tvEdad.setText(""+calculateAge(c.getUser().getDob()));
             tvGenero.setText(c.getUser().getGender());
@@ -75,6 +78,16 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
             setDate(c.getFecha());
             tvNotas.setText(c.getNotas());
             tvAlergias.setText(c.getUser().getAllergies());
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("cita", c);
+                    UpdateCitaFragment fragment = new UpdateCitaFragment();
+                    fragment.setArguments(bundle);
+                    activity.replaceFragment(fragment);
+                }
+            });
         }
 
         private void setDate(String input){

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Final_exam</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="map_direction_title">Hospital Civil\nFray Antonio Alcalde</string>
     <string name="map_direction_direction">Coronel Calderón 777El Retiro\nCP: 44280 Guadalajara, Jal. </string>
@@ -43,12 +42,16 @@
     <string name="maps_hospital_tag">Hospital:&#160;</string>
     <string name="maps_km">km</string>
     <string name="maps_error">No se encontró ruta</string>
-    <string name="maps_key">KEY</string>
 
     <string name="alergias">Alergias</string>
     <string name="mapa">Mapa</string>
     <string name="citas">Citas</string>
     <string name="nueva_cita">Nueva Cita</string>
+    <string name="codigo_qr_si_desea_hacer_su_cita_en_su_clinica">Codigo QR si desea hacer su cita en el hospital:</string>
+    <string name="cancelado">Cancelado</string>
+    <string name="actualiza_cita">actualiza cita</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="eliminar">Eliminar</string>
 
     <string name="emergency_telephone">tel:3334486232</string>
 
@@ -97,7 +100,12 @@
     <string name="LOGIN_SUCCESS_TAG">Success</string>
 
     <string name="DATE_FORMAT">yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'</string>
+    <string name="APPOINTMENT_ID">_id</string>
 
-
+    <string name="GENERIC_ERROR">Hubo un error, porfavor intente mas tarde</string>
+    <string name="hora">Hora</string>
+    <string name="fecha">Fecha</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="agendar">Agendar</string>
 
 </resources>

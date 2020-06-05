@@ -1,5 +1,7 @@
 package com.example.final_exam;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,66 +22,64 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.final_exam.Utils.MyApplication;
 import com.example.final_exam.types.Cita;
+import com.example.final_exam.types.User;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.Date;
 
-
-public class CreateCitaFragment extends Fragment {
+public class CreateCitaLoggedInFragment extends Fragment {
     private static String URL = "https://final-exam-mobile.herokuapp.com/";
-    // 0=id, 1=name, 2=dob, 3=allergies
-    private String[] content;
 
-    private TextView tvNombre, tvEdad, tvAlergias;
+
+    private Bitmap bmp;
     private EditText etHora, etFecha, etDescripcion;
     private Button btnSubmit;
+    User myUser;
 
-    public CreateCitaFragment() {}
+    public CreateCitaLoggedInFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+        myUser = MyApplication.getInstance().getMyUser();
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        String date = inputFormat.format(myUser.getDob());
+        String qrContent = myUser.getId() + "," + myUser.getName() +"," + date + ","+myUser.getAllergies() ;
+        QRCodeWriter writer = new QRCodeWriter();
         try {
-            content = getArguments().getString("content").split(",");
-        } catch(Exception ex){
-            Toast.makeText(getActivity(), "Porfavor verifique el codigo QR", Toast.LENGTH_LONG).show();
-            ((StartActivity)getActivity()).replaceFragment(new StartFragment());
+            BitMatrix bitMatrix = writer.encode(qrContent, BarcodeFormat.QR_CODE, 512, 512);
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                }
+            }
+        } catch (WriterException e) {
+            e.printStackTrace();
         }
-        return inflater.inflate(R.layout.fragment_create_cita, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tvNombre = view.findViewById(R.id.tv_cita_nombre);
-        tvEdad = view.findViewById(R.id.tv_cita_edad);
-        tvAlergias = view.findViewById(R.id.tv_cita_alergias);
-        etDescripcion = view.findViewById(R.id.et_update_descripcion);
-        etHora = view.findViewById(R.id.et_update_hora);
-        etFecha = view.findViewById(R.id.et_update_fecha);
-        btnSubmit = view.findViewById(R.id.btn_actualizar);
+        ((ImageView) getView().findViewById(R.id.iv_qr_code)).setImageBitmap(bmp);
 
-        try {
-            tvNombre.setText(content[1]);
-            tvEdad.setText("" + calculateAge(content[2]));
-            tvAlergias.setText(content[3]);
-        } catch(Exception ex){
-            Toast.makeText(getActivity(), "Porfavor verifique el codigo QR", Toast.LENGTH_LONG).show();
-            ((StartActivity)getActivity()).replaceFragment(new StartFragment());
-        }
+        etDescripcion = view.findViewById(R.id.et_cita_in_descripcion);
+        etHora = view.findViewById(R.id.et_cita_in_hora);
+        etFecha = view.findViewById(R.id.et_cita_in_fecha);
+        btnSubmit = view.findViewById(R.id.btn_cita_in_submit);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,10 +102,11 @@ public class CreateCitaFragment extends Fragment {
                     Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                     return;
                 }
+
                 Cita cita = new Cita();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                cita.setUserId(content[0]);
+                cita.setUserId(myUser.getId());
                 cita.setNotas(etDescripcion.getText().toString());
                 JSONObject json;
                 try {
@@ -125,8 +126,8 @@ public class CreateCitaFragment extends Fragment {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Toast.makeText(getContext(), "Cita creada exitosamente!", Toast.LENGTH_LONG).show();
-                                ((StartActivity)getActivity()).replaceFragment(new StartFragment());
+                                Toast.makeText(getContext(), "Cita creada!", Toast.LENGTH_LONG).show();
+                                ((MainActivity)getActivity()).replaceFragment(new ListaCitasFragment());
                             }
                         },
                         new Response.ErrorListener() {
@@ -141,12 +142,11 @@ public class CreateCitaFragment extends Fragment {
         });
     }
 
-    private int calculateAge(String date) throws ParseException{
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        Date dob = inputFormat.parse(date);
-        LocalDate ldate = Instant.ofEpochMilli(dob.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate now1 = LocalDate.now();
-        Period diff1 = Period.between(ldate, now1);
-        return diff1.getYears();
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_create_cita_logged_in, container, false);
     }
 }

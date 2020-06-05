@@ -8,12 +8,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.JsonObject;
+import com.example.final_exam.Utils.MyApplication;
+import com.example.final_exam.Utils.ReqFromServer;
+import com.example.final_exam.types.Cita;
+import com.example.final_exam.types.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,9 +31,10 @@ import java.util.List;
 
 public class ListaCitasFragment extends Fragment {
     List<Cita> citas;
-    private String APPOINTMENT_ID_USER;
-    private String APPOINTMENT_DATE;
-    private String APPOINTMENT_DESCRIPTION;
+    private static String APPOINTMENT_ID;
+    private static String APPOINTMENT_ID_USER;
+    private static String APPOINTMENT_DATE;
+    private static String APPOINTMENT_DESCRIPTION;
     private String category;
     private CitasAdapter adapter;
     RecyclerView rv_menu;
@@ -40,6 +44,7 @@ public class ListaCitasFragment extends Fragment {
         APPOINTMENT_ID_USER = context.getString(R.string.JSON_APPOINTMENT_USER_ID);
         APPOINTMENT_DATE = context.getString(R.string.JSON_APPOINTMENT_DATE);
         APPOINTMENT_DESCRIPTION = context.getString(R.string.JSON_APPOINTMENT_DESCRITPION);
+        APPOINTMENT_ID = context.getString(R.string.APPOINTMENT_ID);
     }
 
     ReqFromServer.Callback callbackServer = new ReqFromServer.Callback() {
@@ -74,6 +79,8 @@ public class ListaCitasFragment extends Fragment {
             Date dateCita = inputFormat.parse(strDateCita);
             cita.setFecha(dateCita.toString());
             cita.setNotas(jsonObject.getString(APPOINTMENT_DESCRIPTION));
+            cita.setId(jsonObject.getString(APPOINTMENT_ID));
+            cita.setUserId(jsonObject.getString("user_id"));
             citas.add(cita);
         }
     }
@@ -110,7 +117,7 @@ public class ListaCitasFragment extends Fragment {
     }
 
     private void setAdapterToRV() {
-        adapter = new CitasAdapter(getContext(), citas);
+        adapter = new CitasAdapter(getContext(), citas, (MainActivity) getActivity());
         rv_menu.setAdapter(adapter);
     }
 }
